@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScamShield - Fake Job Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div class="logo">🛡️</div>
+    <h1>Scam<span>Shield</span></h1>
+    <p>Paste any job or internship offer. We'll tell you if it smells like a scam, and show you exactly why.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <label for="jobText">Job / internship post</label>
+      <textarea id="jobText" rows="9" placeholder="Paste the job description, WhatsApp message or email here..."></textarea>
+
+      <div class="actions">
+        <button id="analyzeBtn" class="btn primary">Analyze</button>
+        <button id="scamExample" class="btn ghost">Try scam example</button>
+        <button id="legitExample" class="btn ghost">Try legit example</button>
+        <button id="clearBtn" class="btn ghost">Clear</button>
+      </div>
+      <p id="error" class="error hidden"></p>
+    </section>
+
+    <section id="result" class="card hidden">
+      <div class="result-top">
+        <div class="gauge" id="gauge">
+          <div class="gauge-inner">
+            <span id="scoreValue">0%</span>
+            <small>scam risk</small>
+          </div>
+        </div>
+        <div>
+          <h2 id="verdict"></h2>
+          <p class="muted">ML model confidence: <b id="mlProb"></b></p>
+        </div>
+      </div>
+
+      <h3>Your text, with red flags highlighted</h3>
+      <div id="highlighted" class="highlighted"></div>
+
+      <div class="grid">
+        <div>
+          <h3>🚩 Pattern red flags</h3>
+          <ul id="ruleFlags" class="list"></ul>
+        </div>
+        <div>
+          <h3>🧠 Words that pushed the score up</h3>
+          <div id="redWords" class="chips"></div>
+          <h3>✅ Words that looked normal</h3>
+          <div id="safeWords" class="chips"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metricsCard" class="card hidden">
+      <h3>📊 Model performance (test set)</h3>
+      <p class="muted" id="datasetInfo"></p>
+      <table id="metricsTable"></table>
+    </section>
+
+    <footer>
+      <p>⚠️ ScamShield is a student ML project. Use it as a helper, not as the final word. Never pay money to get a job.</p>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
